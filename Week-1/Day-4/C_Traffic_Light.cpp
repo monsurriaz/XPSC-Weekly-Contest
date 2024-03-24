@@ -1,3 +1,7 @@
+/*
+    https://codeforces.com/problemset/problem/1744/C
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,38 +21,23 @@ int main()
         string s;
         cin >> c >> s;
 
-        int ans = 0, pos = -1;
-        int fg = -1;
+        int dis = 0;
+        int ans = 0;
 
-        for (int i = 0; i < s.size(); i++)
+        s += s;
+
+        for (int i = s.size()-1; i >= 0; i--)
         {
-            if (s[i] == c && pos == -1)
-            {
-                pos = i;
-            }
-
+            dis++;
             if (s[i] == 'g')
             {
-                if (pos == -1 && fg == -1)
-                {
-                    fg = i;
-                }
-                else
-                {
-                    ans = max(ans, i-pos);
-                    pos = -1;
-                    if (fg == -1)
-                    {
-                        fg = i;
-                    }
-                }
+                dis = 0;
             }
-        }
 
-        if (pos != -1 && fg != -1)
-        {
-            fg += s.size();
-            ans = max(ans, fg-pos);
+            if (s[i] == c)
+            {
+                ans = max(ans, dis);
+            }
         }
 
         cout << ans << '\n';
