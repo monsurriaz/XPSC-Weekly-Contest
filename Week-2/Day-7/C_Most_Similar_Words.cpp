@@ -23,28 +23,21 @@ int main()
         {
             cin >> v[i];
         }
-
-        sort(v.begin(), v.end());
-
         int mn = INT_MAX;
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < n-1; i++)
         {
-            int ic = 0;
-            int in = 0;
-            
-            for(char c : v[i])
+            for(int j = i+1; j < n; j++)
             {
-                ic += c;
+                int sum = 0;
+                for(int k = 0; k < m; k++)
+                {
+                    sum += abs((v[i][k]-'a'+1) - (v[j][k]-'a'+1));
+                }
+                mn = min(mn, sum);
             }
-            for(char c : v[i+1])
-            {
-                in += c;
-            }
-            
-            mn = min(mn, (abs(ic - in)));
         }
 
-        cout << mn << '\n';
+        cout << mn << endl;
     }
     return 0;
 }
